@@ -31,6 +31,12 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Post('auth/logout')
+  logout(@GetUser() user: User) {
+    this.authService.logout(user);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get('me')
   getProfile(@Request() req) {
     return req.user;

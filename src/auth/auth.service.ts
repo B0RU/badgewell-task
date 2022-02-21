@@ -48,6 +48,10 @@ export class AuthService {
     return await this.userService.create(createUserDto);
   }
 
+  async logout(user: User) {
+    await this.updateRefreshTokenInUser(user._id, null);
+  }
+
   async getAccessToken(payload: object) {
     const accessToken = await this.jwtService.sign(payload);
     return accessToken;
