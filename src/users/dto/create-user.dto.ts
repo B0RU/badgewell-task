@@ -15,4 +15,6 @@ export class CreateUserDto {
   @IsNotEmpty()
   @MinLength(8, { message: 'Password Cannot be lass than 8 charachters' })
   password: string;
+
+  hashedRefreshToken: string;
 }
