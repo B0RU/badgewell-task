@@ -7,11 +7,11 @@ import {
   Request,
   Patch,
 } from '@nestjs/common';
-import { JwtAuthGuard } from './jwt-auth.guard';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { AuthService } from './auth.service';
 import { LoginUserDto } from './dto/login-user.dto';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import { JwtRefreshTokenGuard } from './jwt-refresh-token.guard';
+import { JwtRefreshTokenGuard } from './guards/jwt-refresh-token.guard';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
 import { GetUser } from './decorator/get-user.decorator';
 import { User } from '../users/schemas/user.schema';
