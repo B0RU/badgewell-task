@@ -16,7 +16,7 @@ export class UsersService {
     const CreatedUser = new this.userModel({
       firstName: createUserDto.firstName,
       lastName: createUserDto.lastName,
-      email: createUserDto.email,
+      email: createUserDto.email.toLowerCase(),
       password: hashedPassword,
     });
     return CreatedUser.save();
@@ -30,6 +30,14 @@ export class UsersService {
     const requiredUser = await this.userModel.findById(id);
     if (!requiredUser) {
       throw new NotFoundException();
+    }
+    return requiredUser;
+  }
+
+  async findOneByEmail(email: string): Promise<User> {
+    const requiredUser = await this.userModel.findOne({ email: email });
+    if (!requiredUser) {
+      return null;
     }
     return requiredUser;
   }

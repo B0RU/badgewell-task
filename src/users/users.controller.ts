@@ -1,25 +1,10 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Delete,
-  Put,
-} from '@nestjs/common';
+import { Controller, Get, Body, Param, Delete, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
-@Controller('api')
+@Controller('api/users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
-  //CREATE user by posting to 'api/users'
-  @Post('auth/signup')
-  signup(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
-  }
 
   //GET All Users by getting 'api/users'
   @Get()
