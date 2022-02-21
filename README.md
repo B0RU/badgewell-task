@@ -41,7 +41,7 @@ $ npm run test:cov
 | Parameter   | Type     | Description                        |
 | :---------- | :------- | :--------------------------------- |
 | `firstName` | `String` | **Required**. the name of the user |
-| `LastName`  | `String` | **Required**. the name of the user |
+| `lastName`  | `String` | **Required**. the name of the user |
 | `email`     | `String` | **Required**. user's email         |
 | `password`  | `String` | **Required**. password             |
 
