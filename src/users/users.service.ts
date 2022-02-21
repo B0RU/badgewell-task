@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -13,13 +17,20 @@ export class UsersService {
   async create(createUserDto: CreateUserDto): Promise<User> {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(createUserDto.password, salt);
-    const CreatedUser = new this.userModel({
+    const createdUser = new this.userModel({
       firstName: createUserDto.firstName,
       lastName: createUserDto.lastName,
       email: createUserDto.email.toLowerCase(),
       password: hashedPassword,
     });
-    return CreatedUser.save();
+    const emailduplicate = await this.findOneByEmail(createdUser.email);
+    if (emailduplicate) {
+      throw new ConflictException({
+        statusCode: 409,
+        message: 'Email already exists! please try to login',
+      });
+    }
+    return createdUser.save();
   }
 
   async findAll(): Promise<User[]> {
